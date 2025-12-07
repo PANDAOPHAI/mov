@@ -5,11 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Movies</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Extra overrides for bg video -->
+  <style>
+    body {
+      background-color: #141313; /* default bg for all */
+    }
+
+    /* Background video styling (PC / tablet) */
+    #bg-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+      z-index: -1;
+    }
+
+    /* Mobile: video hidden (and JS se src bhi hat jayega) */
+    @media (max-width: 768px) {
+      #bg-video {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- BG video: src ab data-src me rakha hai, JS desktop pe set karega -->
   <video autoplay muted loop id="bg-video">
-    <source src="theboys.webm" type="video/mp4">
+    <source data-src="theboys.webm" type="video/webm">
     Your browser does not support HTML5 video.
   </video>
 
@@ -30,13 +66,13 @@
     <div class="hero">
       <h1>The Boys</h1>
       <p>It's the powerless against the super powerful as The Boys embark on a heroic quest to expose the truth about “The Seven,” and their formidable Vought backing.</p>
-		<br>
+      <br>
       <div class="tags">
         <span class="tag">Action</span>
         <span class="tag">2019</span>
         <span class="tag">IMDB 8.6⭐</span>
       </div>
-           <div class="buttons">
+      <div class="buttons">
         <a href="theboysui.html"><button class="watch">▶ Watch</button></a>
         <button class="download" onclick="document.getElementById('errorBox').style.display='block'">⬇ Download</button>
       </div>
@@ -61,7 +97,7 @@
         " onclick="document.getElementById('errorBox').style.display='none' ">&nbsp ❌</span>
         Download not available right now.
       </div>
-
+    </div> <!-- hero close -->
 
     <section class="popular">
       <h2>Popular</h2>
@@ -73,27 +109,64 @@
         <img src="https://cdn.marvel.com/content/1x/halfstack_busshelter_48x70_moonknight_v7_lg_0.jpg" alt="Moon Knight" />
         <img src="https://m.media-amazon.com/images/M/MV5BY2U5MjY1NWEtZDI2MS00NTlhLWEyODQtYzE0MzY3NDUyNzE3XkEyXkFqcGc@._V1_.jpg" alt="Kota Factory" />
         <a href="theboysui.html"> <img src="https://wallpapercat.com/w/full/6/b/5/134657-1536x2732-phone-hd-the-boys-wallpaper.jpg" alt="The Boys" /> </a>
-		<a href="IT.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdbXLtpf0dZyDCeZOKmbygEaiAKEcXManfow&s" alt="IT" /> </a>
-    <a href="dh.html"><img src="https://m.media-amazon.com/images/M/MV5BMzFiNTVkZjYtM2I3Yi00MGNjLWEyYTAtMGViNGExZmMzMGMzXkEyXkFqcGc@._V1_QL75_UY281_CR18,0,190,281_.jpg" alt="Dhurandhar" /></a>
-    <img src="img/trending10.jpg" alt="Movie" />
-    <img src="img/trending11.jpg" alt="Movie" />
+        <a href="IT.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdbXLtpf0dZyDCeZOKmbygEaiAKEcXManfow&s" alt="IT" /> </a>
+        <a href="dh.html"><img src="https://m.media-amazon.com/images/M/MV5BMzFiNTVkZjYtM2I3Yi00MGNjLWEyYTAtMGViNGExZmMzMGMzXkEyXkFqcGc@._V1_QL75_UY281_CR18,0,190,281_.jpg" alt="Dhurandhar" /></a>
+        <img src="img/trending10.jpg" alt="Movie" />
+        <img src="img/trending11.jpg" alt="Movie" />
       </div>
     </section>
-	<section class="top-rated">
-  <h2>Top Rated</h2>
-  <div class="movie-slider">
-    <a href="tm.html"><img src="https://musicart.xboxlive.com/7/5a1c6e00-0000-0000-0000-000000000002/504/image.jpg" alt="The Minecraft Movie 2025" /></a>
-   <a href="sgui.html"><img src="https://m.media-amazon.com/images/M/MV5BYTU3ZDVhNmMtMDVlNC00MDc0LTgwNDMtYWE5MTI2ZGI4YWIwXkEyXkFqcGc@._V1_.jpg" alt="Squid Game" /></a>
-    <img src="img/top3.jpg" alt="Movie" />
-    <img src="img/top4.jpg" alt="Movie" />
-    <img src="img/top5.jpg" alt="Movie" />
-    <img src="img/top6.jpg" alt="Movie" />
-    <img src="img/top7.jpg" alt="Movie" />
-    <img src="img/top8.jpg" alt="Movie" />
-    <img src="img/top9.jpg" alt="Movie" />
-    <img src="img/top10.jpg" alt="Movie" />
-  </div>
-  </section>
+
+    <section class="top-rated">
+      <h2>Top Rated</h2>
+      <div class="movie-slider">
+        <a href="tm.html"><img src="https://musicart.xboxlive.com/7/5a1c6e00-0000-0000-0000-000000000002/504/image.jpg" alt="The Minecraft Movie 2025" /></a>
+        <a href="sgui.html"><img src="https://m.media-amazon.com/images/M/MV5BYTU3ZDVhNmMtMDVlNC00MDc0LTgwNDMtYWE5MTI2ZGI4YWIwXkEyXkFqcGc@._V1_.jpg" alt="Squid Game" /></a>
+        <img src="img/top3.jpg" alt="Movie" />
+        <img src="img/top4.jpg" alt="Movie" />
+        <img src="img/top5.jpg" alt="Movie" />
+        <img src="img/top6.jpg" alt="Movie" />
+        <img src="img/top7.jpg" alt="Movie" />
+        <img src="img/top8.jpg" alt="Movie" />
+        <img src="img/top9.jpg" alt="Movie" />
+        <img src="img/top10.jpg" alt="Movie" />
+      </div>
+    </section>
   </main>
+
+  <!-- JS: mobile pe video ka src hata de, desktop pe set kare -->
+  <script>
+    (function () {
+      const video = document.getElementById('bg-video');
+      if (!video) return;
+
+      const source = video.querySelector('source');
+      if (!source) return;
+
+      const realSrc = source.getAttribute('data-src');
+
+      function updateBgVideo() {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        if (isMobile) {
+          // Mobile: src hatao, video stop karo, bg color rakho
+          try { video.pause(); } catch (e) {}
+          source.removeAttribute('src');
+          video.removeAttribute('src');
+          video.load();
+          document.body.style.backgroundColor = '#141313';
+        } else {
+          // Desktop / Tablet: src wapas lagao agar nahi hai
+          if (!source.src && realSrc) {
+            source.src = realSrc;
+            video.load();
+            // autoplay already true hai
+          }
+        }
+      }
+
+      updateBgVideo();
+      window.addEventListener('resize', updateBgVideo);
+    })();
+  </script>
 </body>
 </html>
