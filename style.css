@@ -272,33 +272,39 @@ a {
     padding: 80px 20px;
   }
 }
-/* Watch Button */
+/* ===============================
+   WATCH & DOWNLOAD BUTTON FIX
+   =============================== */
+
+/* WATCH BUTTON */
 button.watch {
-  background: linear-gradient(135deg, #00ffcc, #00b3ff);
-  color: #000;              /* black text for high contrast */
-  font-weight: bold;
-  border: none;
-  padding: 12px 22px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #00ffcc, #00b3ff) !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  border: none !important;
+  padding: 12px 22px !important;
+  border-radius: 8px !important;
 }
 
-/* Download Button */
+/* DOWNLOAD BUTTON */
 button.download {
-  background: linear-gradient(135deg, #ff3c3c, #ff7a00);
-  color: #fff;              /* white text */
-  font-weight: bold;
-  border: none;
-  padding: 12px 22px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #ff3c3c, #ff7a00) !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  border: none !important;
+  padding: 12px 22px !important;
+  border-radius: 8px !important;
 }
 
-/* Hover effects (PC) */
-button.watch:hover {
-  filter: brightness(1.1);
+/* ✅ EXTRA MOBILE FORCE FIX */
+@media (max-width: 768px) {
+  button.watch {
+    background: linear-gradient(135deg, #00ffcc, #00b3ff) !important;
+    color: #000 !important;
+  }
+
+  button.download {
+    background: linear-gradient(135deg, #ff3c3c, #ff7a00) !important;
+    color: #fff !important;
+  }
 }
-
-button.download:hover {
-  filter: brightness(1.1);
-}
-
-
