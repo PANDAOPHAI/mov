@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Squid Game UI</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       background-color: #0f0f0f;
@@ -20,8 +24,23 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      height: 80vh;
-      backdrop-filter: blur(5px);
+      height: 75vh;
+      position: relative;
+    }
+
+    /* Dark overlay for readability */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), #0f0f0f);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
     }
 
     .hero h1 {
@@ -31,12 +50,19 @@
 
     .hero p {
       max-width: 600px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       line-height: 1.5;
+      margin: 0;
     }
 
     .episodes {
-      padding: 30px;
+      padding: 30px 30px 40px;
+    }
+
+    .episodes-title {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      font-weight: 600;
     }
 
     .episode-card {
@@ -45,60 +71,167 @@
       border-radius: 12px;
       margin-bottom: 20px;
       overflow: hidden;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .episode-card:hover {
       background-color: #272727;
       cursor: pointer;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
     }
 
     .episode-thumb {
-      width: 200px;
+      width: 260px;
+      max-height: 170px;
       object-fit: cover;
+      flex-shrink: 0;
     }
 
     .episode-info {
       padding: 20px;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .episode-info h2 {
       margin: 0;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
     .episode-info p {
       margin: 8px 0;
       color: #ccc;
+      font-size: 0.98rem;
     }
 
     .episode-info small {
       display: block;
       color: #999;
       font-size: 0.9rem;
+      margin-top: 4px;
     }
 
     .play-btn {
-      padding: 10px 20px;
+      padding: 10px 18px;
       background: #e50914;
       color: white;
       border: none;
       border-radius: 6px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
       margin-top: 10px;
+      align-self: flex-start;
     }
+
+    .play-btn:hover {
+      background: #f6121d;
+    }
+
+    /* ------------ RESPONSIVE (TABLET & MOBILE) ------------ */
+
+    @media (max-width: 900px) {
+      .hero {
+        height: auto;
+        min-height: 60vh;
+        padding: 50px 20px;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero p {
+        font-size: 0.98rem;
+      }
+
+      .episodes {
+        padding: 24px 20px 32px;
+      }
+
+      .episode-thumb {
+        width: 210px;
+        max-height: 150px;
+      }
+
+      .episode-info {
+        padding: 16px;
+      }
+
+      .episode-info h2 {
+        font-size: 1.15rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 40px 16px 30px;
+        background-position: top center;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+      }
+
+      .episodes {
+        padding: 20px 14px 28px;
+      }
+
+      .episodes-title {
+        font-size: 1.3rem;
+      }
+
+      .episode-card {
+        flex-direction: column;
+      }
+
+      .episode-thumb {
+        width: 100%;
+        height: 190px;
+        max-height: none;
+      }
+
+      .episode-info {
+        padding: 14px 12px 16px;
+      }
+
+      .episode-info h2 {
+        font-size: 1.05rem;
+      }
+
+      .episode-info p {
+        font-size: 0.88rem;
+      }
+
+      .play-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 9px 0;
+        align-self: stretch;
+      }
+    }
+
   </style>
 </head>
 <body>
 
   <div class="hero">
-    <h1>Squid Game</h1>
-    <p>A story of people who fail at life for various reasons, but suddenly receive a mysterious invitation to participate in a survival game to win more than 38 million US dollars.</p>
+    <div class="hero-content">
+      <h1>Squid Game</h1>
+      <p>A story of people who fail at life for various reasons, but suddenly receive a mysterious invitation to participate in a survival game to win more than 38 million US dollars.</p>
+    </div>
   </div>
 
   <div class="episodes">
+    <div class="episodes-title">Season 3 Episodes</div>
+
     <div class="episode-card" onclick="location.href='sgs3e1.html'">
       <img class="episode-thumb" src="https://images2.minutemediacdn.com/image/upload/c_fill,w_1200,ar_4:3,f_auto,q_auto,g_auto/images/ImageExchange/mmsport/385/01jyn7w0zgzgz2j4q25p.jpg" alt="S3 E1">
       <div class="episode-info">
@@ -112,14 +245,14 @@
     <div class="episode-card" onclick="location.href='sgs3e2.html'">
       <img class="episode-thumb" src="https://cdn.mos.cms.futurecdn.net/CMDAthigu5GydzACxPhpPM.jpg" alt="S3 E2">
       <div class="episode-info">
-        <h2>S1 E2 - "The Starry Night"</h2>
+        <h2>S3 E2 - "The Starry Night"</h2>
         <small>July 26, 2019 • 61m • U/A 18+</small>
         <p>The Boys get themselves a Superhero, Starlight gets payback, Homelander gets naughty...</p>
         <button class="play-btn">Watch Now</button>
       </div>
     </div>
 
-    <div class="episode-card" onclick="location.href='theboysS1E3.html'">
+    <div class="episode-card" onclick="location.href='sgs3e3.html'">
       <img class="episode-thumb" src="https://i1.sndcdn.com/artworks-Lory2cAhlTbC-0-t500x500.jpg" alt="S3 E3">
       <div class="episode-info">
         <h2>S3 E3 - "It's not your fault"</h2>
