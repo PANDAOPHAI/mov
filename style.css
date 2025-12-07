@@ -9,6 +9,15 @@ body, html {
   font-family: 'Segoe UI', sans-serif;
   color: #fff;
   overflow-x: hidden;
+
+  /* 👇 PURE PAGE KA SCROLLBAR HIDE */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/old Edge */
+}
+
+/* Chrome / Edge / Safari vertical scrollbar hide */
+body::-webkit-scrollbar {
+  display: none;
 }
 
 #bg-video {
@@ -21,7 +30,6 @@ body, html {
   z-index: -1;
   object-fit: cover;
 }
-
 
 .overlay {
   position: fixed;
@@ -58,13 +66,14 @@ header {
     #fcb045,
     #ff6a00
   );
-background-size: 300% 300%;
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientShift 6s ease infinite;
   position: relative;
   transition: transform 0.3s ease;
 }
+
 .logo::after {
   content: 'TG Mov 🎬';
   position: absolute;
@@ -92,6 +101,7 @@ background-size: 300% 300%;
   filter: blur(12px);
   opacity: 0.8;
 }
+
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -221,11 +231,20 @@ nav a {
   margin: 40px 0 20px;
 }
 
+/* MOVIE SLIDER */
 .movie-slider {
   display: flex;
   overflow-x: auto;
   gap: 15px;
   padding-bottom: 20px;
+
+  /* 👇 ONLY SLIDER KA HORIZONTAL SCROLLBAR HIDE */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/old Edge */
+}
+
+.movie-slider::-webkit-scrollbar {
+  display: none;              /* Chrome / Edge / Safari */
 }
 
 .movie-slider img {
@@ -239,11 +258,11 @@ nav a {
 .movie-slider img:hover {
   transform: scale(1.1);
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
-
 
 @media screen and (max-width: 768px) {
   .hero h1 {
