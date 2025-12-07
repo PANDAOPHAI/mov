@@ -272,3 +272,33 @@ a {
     padding: 80px 20px;
   }
 }
+/* Watch Button */
+button.watch {
+  background: linear-gradient(135deg, #00ffcc, #00b3ff);
+  color: #000;              /* black text for high contrast */
+  font-weight: bold;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+}
+
+/* Download Button */
+button.download {
+  background: linear-gradient(135deg, #ff3c3c, #ff7a00);
+  color: #fff;              /* white text */
+  font-weight: bold;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+}
+
+/* Hover effects (PC) */
+button.watch:hover {
+  filter: brightness(1.1);
+}
+
+button.download:hover {
+  filter: brightness(1.1);
+}
+
+
