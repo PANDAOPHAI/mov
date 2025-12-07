@@ -400,27 +400,61 @@
   videoPan.addEventListener('pointerup', e=> { dragging = false; try{ videoPan.releasePointerCapture(e.pointerId); }catch{} });
   videoPan.addEventListener('pointercancel', ()=> { dragging = false; });
 
-  // Fullscreen on playerEl so controls remain
+  // ===== Fullscreen (desktop + mobile friendly) =====
   fsBtn.addEventListener('click', async ()=> {
     try {
-      if (!document.fullscreenElement) {
-        if (playerEl.requestFullscreen) await playerEl.requestFullscreen();
-        else if (playerEl.webkitRequestFullscreen) await playerEl.webkitRequestFullscreen();
-      }
-      else {
-        if (document.exitFullscreen) await document.exitFullscreen();
-        else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+      const doc = document;
+      const isFull =
+        doc.fullscreenElement ||
+        doc.webkitFullscreenElement ||
+        doc.msFullscreenElement;
+
+      if (!isFull) {
+        // Enter fullscreen
+        if (playerEl.requestFullscreen) {
+          await playerEl.requestFullscreen();
+        } else if (playerEl.webkitRequestFullscreen) {
+          await playerEl.webkitRequestFullscreen();
+        } else if (video.requestFullscreen) {
+          await video.requestFullscreen();
+        } else if (video.webkitEnterFullscreen) {
+          // iOS Safari video fullscreen
+          video.webkitEnterFullscreen();
+        }
+      } else {
+        // Exit fullscreen
+        if (doc.exitFullscreen) {
+          await doc.exitFullscreen();
+        } else if (doc.webkitExitFullscreen) {
+          await doc.webkitExitFullscreen();
+        } else if (doc.msExitFullscreen) {
+          await doc.msExitFullscreen();
+        }
       }
     } catch(e){ console.warn(e); }
   });
-  document.addEventListener('fullscreenchange', ()=> {
+
+  function handleFsChange(){
     const controlsBar = document.getElementById('controlsBar');
-    if (document.fullscreenElement) { controlsBar.style.zIndex = 300; settingsMenu.style.zIndex = 400; }
-    else { controlsBar.style.zIndex = 60; settingsMenu.style.zIndex = 200; }
-  });
+    const doc = document;
+    const isFull =
+      doc.fullscreenElement ||
+      doc.webkitFullscreenElement ||
+      doc.msFullscreenElement;
+    if (isFull) {
+      controlsBar.style.zIndex = 300;
+      settingsMenu.style.zIndex = 400;
+    } else {
+      controlsBar.style.zIndex = 60;
+      settingsMenu.style.zIndex = 200;
+    }
+  }
+
+  ['fullscreenchange','webkitfullscreenchange','msfullscreenchange']
+    .forEach(ev => document.addEventListener(ev, handleFsChange));
+  // =============================================
 
   // ===== Picture-in-Picture (PiP) handling =====
-  // Hide PiP button if not supported
   if (!('pictureInPictureEnabled' in document) || video.disablePictureInPicture) {
     pipBtn.style.display = 'none';
   }
@@ -428,14 +462,16 @@
   pipBtn.addEventListener('click', async ()=> {
     try {
       // Some browsers don't allow PiP in fullscreen -> exit fullscreen first
-      if (document.fullscreenElement) {
-        if (document.exitFullscreen) await document.exitFullscreen();
+      const doc = document;
+      if (doc.fullscreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement) {
+        if (doc.exitFullscreen) await doc.exitFullscreen();
+        else if (doc.webkitExitFullscreen) await doc.webkitExitFullscreen();
+        else if (doc.msExitFullscreen) await doc.msExitFullscreen();
       }
 
       if (document.pictureInPictureElement) {
         await document.exitPictureInPicture();
       } else {
-        // Ensure video has a source and started at least once
         if (!video.src && !Hls.isSupported()) {
           showToast('Start video first');
           return;
@@ -448,7 +484,6 @@
     }
   });
 
-  // Change icon when entering/leaving PiP
   video.addEventListener('enterpictureinpicture', ()=> {
     pipBtn.textContent = '◼'; // indicate "exit"
     pipBtn.title = 'Exit Picture in Picture';
