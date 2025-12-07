@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squid Game UI</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    .hero {
+      background-image: url('https://images.expothemes.com/squid-game/images/squid-game-windows-theme-9-hd.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 60px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 80vh;
+      backdrop-filter: blur(5px);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin: 0 0 10px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .episodes {
+      padding: 30px;
+    }
+
+    .episode-card {
+      display: flex;
+      background-color: #1c1c1c;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: background-color 0.2s ease;
+    }
+
+    .episode-card:hover {
+      background-color: #272727;
+      cursor: pointer;
+    }
+
+    .episode-thumb {
+      width: 200px;
+      object-fit: cover;
+    }
+
+    .episode-info {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .episode-info h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .episode-info p {
+      margin: 8px 0;
+      color: #ccc;
+    }
+
+    .episode-info small {
+      display: block;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .play-btn {
+      padding: 10px 20px;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Squid Game</h1>
+    <p>A story of people who fail at life for various reasons, but suddenly receive a mysterious invitation to participate in a survival game to win more than 38 million US dollars.</p>
+  </div>
+
+  <div class="episodes">
+    <div class="episode-card" onclick="location.href='sgs3e1.html'">
+      <img class="episode-thumb" src="https://images2.minutemediacdn.com/image/upload/c_fill,w_1200,ar_4:3,f_auto,q_auto,g_auto/images/ImageExchange/mmsport/385/01jyn7w0zgzgz2j4q25p.jpg" alt="S3 E1">
+      <div class="episode-info">
+        <h2>S3 E1 - "Keys and Knives"</h2>
+        <small>July 26, 2019 • 62m • U/A 18+</small>
+        <p>When a Supe kills the love of his life, A/V salesman Hughie teams up with Billy Butcher...</p>
+        <button class="play-btn">Watch Now</button>
+      </div>
+    </div>
+
+    <div class="episode-card" onclick="location.href='sgs3e2.html'">
+      <img class="episode-thumb" src="https://cdn.mos.cms.futurecdn.net/CMDAthigu5GydzACxPhpPM.jpg" alt="S3 E2">
+      <div class="episode-info">
+        <h2>S1 E2 - "The Starry Night"</h2>
+        <small>July 26, 2019 • 61m • U/A 18+</small>
+        <p>The Boys get themselves a Superhero, Starlight gets payback, Homelander gets naughty...</p>
+        <button class="play-btn">Watch Now</button>
+      </div>
+    </div>
+
+    <div class="episode-card" onclick="location.href='theboysS1E3.html'">
+      <img class="episode-thumb" src="https://i1.sndcdn.com/artworks-Lory2cAhlTbC-0-t500x500.jpg" alt="S3 E3">
+      <div class="episode-info">
+        <h2>S3 E3 - "It's not your fault"</h2>
+        <small>July 26, 2019 • 57m • U/A 18+</small>
+        <p>It’s the race of the century. A-Train versus Shockwave, vying for the title of World’s Fastest Man...</p>
+        <button class="play-btn">Watch Now</button>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

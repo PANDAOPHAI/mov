@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Boys - Episode Selector</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    .hero {
+      background-image: url('https://wallpapercat.com/w/full/0/6/1/16234-3840x2160-desktop-4k-the-boys-wallpaper-photo.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 60px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 80vh;
+      backdrop-filter: blur(5px);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin: 0 0 10px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .episodes {
+      padding: 30px;
+    }
+
+    .episode-card {
+      display: flex;
+      background-color: #1c1c1c;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: background-color 0.2s ease;
+    }
+
+    .episode-card:hover {
+      background-color: #272727;
+      cursor: pointer;
+    }
+
+    .episode-thumb {
+      width: 200px;
+      object-fit: cover;
+    }
+
+    .episode-info {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .episode-info h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .episode-info p {
+      margin: 8px 0;
+      color: #ccc;
+    }
+
+    .episode-info small {
+      display: block;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .play-btn {
+      padding: 10px 20px;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>The Boys</h1>
+    <p>In a world where superheroes embrace the darker side of their massive celebrity and fame, THE BOYS centers on a group of vigilantes known informally as "The Boys," who set out to take down corrupt superheroes with no more than their blue-collar grit and a willingness to fight dirty.</p>
+  </div>
+
+  <div class="episodes">
+    <div class="episode-card" onclick="location.href='theboysS1E1.html'">
+      <img class="episode-thumb" src="https://m.media-amazon.com/images/S/pv-target-images/72b69c5d0f16e4548fa2b9a06745c70a6f29f8e1e6f9a25cd4ec4286dc11b7f7.png" alt="S1 E1">
+      <div class="episode-info">
+        <h2>S1 E1 - "The Name of the Game"</h2>
+        <small>July 26, 2019 • 62m • U/A 18+</small>
+        <p>When a Supe kills the love of his life, A/V salesman Hughie teams up with Billy Butcher...</p>
+        <button class="play-btn">Watch Now</button>
+      </div>
+    </div>
+
+    <div class="episode-card" onclick="location.href='theboysS1E2.html'">
+      <img class="episode-thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu3sgdEl59VRjByr9vU8toMu3yRDkzofgthw&s" alt="S1 E2">
+      <div class="episode-info">
+        <h2>S1 E2 - "Cherry"</h2>
+        <small>July 26, 2019 • 61m • U/A 18+</small>
+        <p>The Boys get themselves a Superhero, Starlight gets payback, Homelander gets naughty...</p>
+        <button class="play-btn">Watch Now</button>
+      </div>
+    </div>
+
+    <div class="episode-card" onclick="location.href='theboysS1E3.html'">
+      <img class="episode-thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOyIfKHWOpLiYoyMehrwMiLXPwaf7WOH0twA&s" alt="S1 E3">
+      <div class="episode-info">
+        <h2>S1 E3 - "Get Some"</h2>
+        <small>July 26, 2019 • 57m • U/A 18+</small>
+        <p>It’s the race of the century. A-Train versus Shockwave, vying for the title of World’s Fastest Man...</p>
+        <button class="play-btn">Watch Now</button>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

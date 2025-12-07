@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Boys S1 E1 - Netflix Style</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://m.media-amazon.com/images/M/MV5BMWJlN2U5MzItNjU4My00NTM2LWFjOWUtOWFiNjg3ZTMxZDY1XkEyXkFqcGc@._V1_QL75_UX500_CR0,172,500,281_.jpg') no-repeat center center / cover;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .player-container {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-shadow: 2px 2px 6px #000;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      outline: none;
+    }
+
+    .controls {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+    }
+
+    select {
+      background: #141414;
+      color: white;
+      padding: 10px 16px;
+      border: 1px solid #555;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    select:hover {
+      background: #1f1f1f;
+      border-color: red;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .controls select {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="player-container">
+  <h1>The Boys - Season 1, Episode 1</h1>
+  <video id="video" controls poster="https://m.media-amazon.com/images/M/MV5BMWJlN2U5MzItNjU4My00NTM2LWFjOWUtOWFiNjg3ZTMxZDY1XkEyXkFqcGc@._V1_QL75_UX500_CR0,172,500,281_.jpg"></video>
+  <div class="controls">
+    <select id="qualitySelector">
+      <option disabled selected>Loading qualities...</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  const video = document.getElementById('video');
+  const selector = document.getElementById('qualitySelector');
+  const videoSrc = "https://s10.nm-cdn7.top/files/0OBCCGYKAAAAYD4D0J29QKHBWD/1080p/-1080p.m3u8";
+  
+
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      selector.innerHTML = "";
+
+      hls.levels.forEach((level, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+        option.text = `${level.height}p`;
+        selector.appendChild(option);
+      });
+
+      selector.value = hls.currentLevel;
+
+      selector.addEventListener("change", () => {
+        hls.currentLevel = parseInt(selector.value);
+      });
+    });
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = videoSrc;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squid Game</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.moneycontrol.com/static-mcnews/2025/05/20250523055029_Squid-Game-Season-3-will-soon-release-on-Netflix.png') no-repeat center center / cover;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .player-container {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+      width: 90%;
+      max-width: 1000px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-shadow: 2px 2px 6px #000;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      outline: none;
+    }
+
+    .volume-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .volume-slider {
+      width: 200px;
+      height: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: #444;
+      outline: none;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: red;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      background: red;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+
+    .description {
+      max-width: 1000px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .mute-button {
+      background: #1f1f1f;
+      color: white;
+      border: 1px solid #555;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .mute-button:hover {
+      background: #333;
+      border-color: red;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="player-container">
+  <h1>Squid Game - Season 3, Episode 2</h1>
+  <video id="video" controls autoplay muted preload="auto" poster="https://images.moneycontrol.com/static-mcnews/2025/05/20250523055029_Squid-Game-Season-3-will-soon-release-on-Netflix.png"></video>
+  <audio id="audio" preload="auto"></audio>
+  <div class="volume-controls">
+    <span>🔊</span>
+    <input type="range" min="0" max="1" step="0.01" class="volume-slider" id="volumeSlider">
+    <button class="mute-button" id="muteBtn">Mute</button>
+  </div>
+</div>
+
+<div class="description">
+<strong>
+<image src="https://cdn-icons-png.flaticon.com/512/5977/5977585.png" width=35></image>
+   A story of people who fail at life for various reasons, but suddenly receive a mysterious invitation to participate in a survival game to win more than 38 million US dollars.</strong>
+</div>
+
+<script>
+  const videoURL = "https://netfree2.cc/hls/81721227.m3u8?in=225dc3d08ad5e6bc442f664c89822560::c27fdb51eadd120d865dc022f450e2d8::1751031078::ni";
+  const audioURL = "https://s01.nm-cdn24.top/files/81721227/a/8/8.m3u8";
+  const video = document.getElementById("video");
+  const audio = document.getElementById("audio");
+  const volumeSlider = document.getElementById("volumeSlider");
+  const muteBtn = document.getElementById("muteBtn");
+
+  if (Hls.isSupported()) {
+    const hlsVideo = new Hls({ maxBufferLength: 10, enableWorker: true });
+    hlsVideo.loadSource(videoURL);
+    hlsVideo.attachMedia(video);
+
+    const hlsAudio = new Hls({ maxBufferLength: 10, enableWorker: true });
+    hlsAudio.loadSource(audioURL);
+    hlsAudio.attachMedia(audio);
+  } else {
+    video.src = videoURL;
+    audio.src = audioURL;
+  }
+
+  setInterval(() => {
+    if (Math.abs(video.currentTime - audio.currentTime) > 0.3) {
+      audio.currentTime = video.currentTime;
+    }
+  }, 500);
+
+  video.addEventListener("play", () => audio.play());
+  video.addEventListener("pause", () => audio.pause());
+  video.addEventListener("seeking", () => {
+    audio.currentTime = video.currentTime;
+  });
+
+  volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.value;
+  });
+
+  // Default volume 100%
+  volumeSlider.value = 1;
+  audio.volume = 1;
+
+  muteBtn.addEventListener("click", () => {
+    audio.muted = !audio.muted;
+    muteBtn.textContent = audio.muted ? "Unmute" : "Mute";
+  });
+</script>
+
+</body>
+</html>
